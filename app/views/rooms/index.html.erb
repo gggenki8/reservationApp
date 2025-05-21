@@ -9,6 +9,7 @@
 <% end %>
 
     <% if @rooms.any? %>
+    <div class = "room-grid">
     <% @rooms.each do |room| %>
       <div class="room-card">
         <% if room.image.attached? %>
@@ -24,4 +25,5 @@
     <% end %>
   <% else %>
     <p>該当する部屋がありません。</p>
+    </div>
 <% end %>

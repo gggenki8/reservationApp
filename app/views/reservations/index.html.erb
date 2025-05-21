@@ -1,31 +1,47 @@
 <h2>予約済み一覧</h2>
 
-<% if @reservations.any? %>
-  <ul>
-    <% @reservations.each do |reservation| %>
-      <li style="border-bottom: 1px solid #ccc; padding: 10px 0;">
-        <% if reservation.room.image.attached? %>
-          <%= image_tag reservation.room.image, style: "width: 200px; height: auto;" %>
-        <% else %>
-        <%= image_tag "no_image.png",class: "room-image" %>
-        <% end %>
+<p>予約件数: <%= @reservations&.count || 0 %></p>
 
-        <p><strong>施設名:</strong> <%= link_to reservation.room.name, room_path(reservation.room) %></p>
-        <p><strong>紹介文:</strong> <%= truncate(reservation.room.description, length: 60) %></p>
-
+<% if @reservations.present? %>
+  <table>
+    <thead>
+      <tr>
+        <th>画像</th>
+        <th>施設名</th>
+        <th>紹介文</th>
+        <th>合計料金</th>
+        <th>チェックイン</th>
+        <th>チェックアウト</th>
+        <th>予約確定日時</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @reservations.each do |reservation| %>
         <% stay_days = (reservation.check_out - reservation.check_in).to_i %>
         <% total_price = stay_days * reservation.number_of_guests * reservation.room.price %>
-
-        <p><strong>合計料金:</strong> <%= number_to_currency(total_price, unit: "¥", precision: 0) %></p>
-        <p><strong>チェックイン:</strong> <%= reservation.check_in.strftime("%Y/%m/%d") %></p>
-        <p><strong>チェックアウト:</strong> <%= reservation.check_out.strftime("%Y/%m/%d") %></p>
-        <p><strong>予約確定日時:</strong> <%= reservation.created_at.strftime("%Y/%m/%d/ %H:%M") %></p>
-        <%= form_with url: room_reservation_path(reservation.room, reservation), method: :delete, local: true do %>
-            <%= submit_tag "予約をキャンセル", data: { confirm: "本当にキャンセルしますか？" } %>
-          <% end %>          
-      </li>
-    <% end %>
-  </ul>
+        <tr>
+          <td>
+            <% if reservation.room.image.attached? %>
+              <%= image_tag reservation.room.image.variant(resize_to_limit: [100, 100]), class: "room-image" %>
+            <% else %>
+              <%= image_tag "no_image.png", class: "room-image" %>
+            <% end %>
+          </td>
+          <td><%= link_to reservation.room.name, room_path(reservation.room) %></td>
+          <td><%= truncate(reservation.room.description.to_s, length: 50) %></td>
+          <td><%= number_to_currency(total_price, unit: "¥", precision: 0) %></td>
+          <td><%= reservation.check_in.strftime("%Y/%m/%d") %></td>
+          <td><%= reservation.check_out.strftime("%Y/%m/%d") %></td>
+          <td><%= reservation.created_at.strftime("%Y/%m/%d %H:%M") %></td>
+          <td>
+            <%= form_with url: room_reservation_path(reservation.room, reservation), method: :delete, local: true do %>
+              <%= submit_tag "予約をキャンセル", data: { confirm: "本当にキャンセルしますか？" }, class: "cancel-button" %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 <% else %>
   <p>まだ予約はありません。</p>
 <% end %>

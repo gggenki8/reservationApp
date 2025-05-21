@@ -15,12 +15,14 @@
         <%= link_to "✏️編集", edit_profile_user_path(@user) %>
     </div>
     <div class = "account-view">
-        <% if @user.present? %>
-        <p>アイコン画像 <%= @user.avatar %></p>
+        <p>アイコン画像</p>
+         <% if @user.present? %>
+        <% @user.avatar.attached? %>
+        <%= image_tag @user.avatar, alt: "ユーザーアイコン", class: "user-avator" %>
+        <% else %>
+        <%= image_tag "no_icon_image.png", alt: "デフォルトアイコン", class: "user-avatar" %>
+        <% end %>
         <p>名前 <%= @user.name %></p>
         <p>自己紹介 <%= @user.introduction %></p>
-        <% else %>
-        <p>ログインしてください</p>
-        <% end %>
     </div>
 </body>
