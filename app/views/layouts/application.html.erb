@@ -7,10 +7,52 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+    <header class="site-header">
+      <div class="logo">
+        <%= link_to "Potepan Share", root_path %>
+      </div>
+      <nav class="header-nav">
+        <% if user_signed_in? %>
+          <div class="user-menu" id="user-menu">
+            <% if current_user.avatar.attached? %>
+              <%= image_tag current_user.avatar.variant(resize_to_limit: [40, 40]), class: "avatar-circle" %>
+            <% else %>
+              <%= image_tag "no_icon.png", class: "avatar-circle" %>
+            <% end %>
+            <div class="dropdown">
+              <span class="user-name" id="user-name"><%= current_user.name %> ▼</span>
+              <ul class="dropdown-menu">
+                <li><%= link_to "施設の新規登録", new_room_path %></li>
+                <li><%= link_to "予約済み一覧", reservations_path %></li>
+                <li><%= link_to "登録済み一覧", my_rooms_user_path(current_user) %></li>
+                <li><%= link_to "アカウント設定", profile_user_path(current_user) %></li>
+                <%= button_to "ログアウト", destroy_user_session_path, method: :delete %>
+
+                <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+              </ul>
+            </div>
+          </div>
+        <% else %>
+          <ul>
+            <li><%= link_to "ログイン", new_user_session_path %></li>
+            <li><%= link_to "新規登録", new_user_registration_path %></li>
+          </ul>
+        <% end %>
+      </nav>
+    </header>
+
     <%= yield %>
+
+    <footer class="site-footer">
+      <div class="footer-content">
+        <h3>Potepan Share</h3>
+        <p>Copyright © Potepan Share 2025 All rights reserved</p>
+      </div>
+    </footer>
+
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </body>
 </html>

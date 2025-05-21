@@ -1,0 +1,45 @@
+<main class="main-view">
+  <div class="back-image">
+    <img src="https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDJ8fG1vdW50YWluJTIwY29sb3J8ZW58MHx8fHwxNjg5NTQyMjA0&ixlib=rb-4.0.3&q=80&w=1080" alt="main_image">
+  </div>
+
+  <div class="main-content">
+    <h1 class="hello-title">
+      Potepan shareで<br>
+      まだ経験したことのない<br>
+      旅をしよう
+    </h1>
+
+    <div class="search-section">
+    <%= form_with(url: search_rooms_path, method: :get, local: true) do |form| %>
+        <%= form.text_field :area, placeholder: "エリア名を入力", class: "search_input" %>
+        <%= form.submit "検索", class: "search_button" %>
+    <% end %>
+    </div>
+  </div>
+
+  <h2>おすすめのエリア</h2>
+  <div class="recommended-areas">
+  <%= link_to search_rooms_path(area: "東京"), class: "area-box" do %>
+    <%= image_tag "tokyo.png", alt: "東京", class: "area-image" %>
+    <p>東京</p>
+  <% end %>
+
+  <%= link_to search_rooms_path(area: "大阪"), class: "area-box" do %>
+<%= image_tag "osaka.png", alt: "大阪", class: "area-image" %>
+    <p>大阪</p>
+  <% end %>
+
+  <%= link_to search_rooms_path(area: "京都"), class: "area-box" do %>
+<%= image_tag "kyoto.png", alt: "京都", class: "area-image" %>
+    <p>京都</p>
+  <% end %>
+
+  <%= link_to search_rooms_path(area: "札幌"), class: "area-box" do %>
+<%= image_tag "sapporo.png", alt: "札幌", class: "area-image" %>
+    <p>札幌</p>
+  <% end %>
+</div>
+
+
+</main>

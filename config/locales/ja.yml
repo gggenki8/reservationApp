@@ -1,0 +1,20 @@
+ja:
+  activerecord:
+    models:
+      room: 施設
+    attributes:
+      room:
+        name: 施設名
+        description: 施設詳細
+        price: 料金
+        address: 住所
+  errors:
+    messages:
+      blank: "を入力してください"
+      greater_than_or_equal_to: "%{count}以上にしてください"
+    models:
+      user: ユーザー
+    attributes:
+      user:
+        email: メールアドレス
+        password: パスワード

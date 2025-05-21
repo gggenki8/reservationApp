@@ -1,0 +1,31 @@
+<h2>予約済み一覧</h2>
+
+<% if @reservations.any? %>
+  <ul>
+    <% @reservations.each do |reservation| %>
+      <li style="border-bottom: 1px solid #ccc; padding: 10px 0;">
+        <% if reservation.room.image.attached? %>
+          <%= image_tag reservation.room.image, style: "width: 200px; height: auto;" %>
+        <% else %>
+        <%= image_tag "no_image.png",class: "room-image" %>
+        <% end %>
+
+        <p><strong>施設名:</strong> <%= link_to reservation.room.name, room_path(reservation.room) %></p>
+        <p><strong>紹介文:</strong> <%= truncate(reservation.room.description, length: 60) %></p>
+
+        <% stay_days = (reservation.check_out - reservation.check_in).to_i %>
+        <% total_price = stay_days * reservation.number_of_guests * reservation.room.price %>
+
+        <p><strong>合計料金:</strong> <%= number_to_currency(total_price, unit: "¥", precision: 0) %></p>
+        <p><strong>チェックイン:</strong> <%= reservation.check_in.strftime("%Y/%m/%d") %></p>
+        <p><strong>チェックアウト:</strong> <%= reservation.check_out.strftime("%Y/%m/%d") %></p>
+        <p><strong>予約確定日時:</strong> <%= reservation.created_at.strftime("%Y/%m/%d/ %H:%M") %></p>
+        <%= form_with url: room_reservation_path(reservation.room, reservation), method: :delete, local: true do %>
+            <%= submit_tag "予約をキャンセル", data: { confirm: "本当にキャンセルしますか？" } %>
+          <% end %>          
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>まだ予約はありません。</p>
+<% end %>

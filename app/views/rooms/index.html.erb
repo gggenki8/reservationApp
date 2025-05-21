@@ -1,0 +1,27 @@
+<%= form_with(url:  search_rooms_path, method: :get, local: true) do %>
+  <div class= "search-form">
+    <%= text_field_tag :area, params[:area], placeholder: "エリアを入力(例：東京)", class: "form-control" %>
+    
+    <%= text_field_tag :keyword, params[:keyword], placeholder: "キーワードを入力", class: "form-control" %>
+    
+    <%= submit_tag "検索", class: "submit-button" %>
+    </div>
+<% end %>
+
+    <% if @rooms.any? %>
+    <% @rooms.each do |room| %>
+      <div class="room-card">
+        <% if room.image.attached? %>
+          <%= image_tag room.image, width: 300 %>
+        <% else %>
+          <%= image_tag "no_image.png",class: "room-image" %>
+        <% end %>
+        <h3><%= link_to room.name, room_path(room) %></h3>
+        <p>住所: <%= room.address %></p>
+        <p><%= room.description %></p>
+        <p><%= number_to_currency(room.price, unit: "¥", precision: 0) %></p>
+      </div>
+    <% end %>
+  <% else %>
+    <p>該当する部屋がありません。</p>
+<% end %>

@@ -1,0 +1,28 @@
+<h2>予約内容の確認</h2>
+<p>チェックイン日: <%= @reservation.check_in.strftime("%Y年/%m月/%d日") if @reservation.check_in.present? %></p>
+<p>チェックアウト日: <%= @reservation.check_out.strftime("%Y年/%m月/%d日") if @reservation.check_out.present?%></p>
+<p>宿泊日数: <%= @stay_days %>日</p>
+<p>人数: <%= @reservation.number_of_guests %>人</p>
+<p>お支払い金額: <%= number_to_currency(@total_price, unit: "¥") %></p>
+<p>上記の内容で正しければ「確定」ボタンを押してください。</p>
+<div>
+  <%= form_with url: room_reservations_path(@room), method: :post, local: true do |form| %>
+    <%= hidden_field_tag "reservation[check_in]", @reservation.check_in %>
+    <%= hidden_field_tag "reservation[check_out]", @reservation.check_out %>
+    <%= hidden_field_tag "reservation[number_of_guests]", @reservation.number_of_guests %>
+
+    <%= form.submit "予約を確定", data: { confirm: "本当に予約を確定しますか？" }%>
+  <% end %>
+  <%= link_to "キャンセル", rooms_path %>
+</div>
+
+<% if @reservation.errors.any? %>
+  <div class="error-messages">
+    <h2>エラーが発生しました:</h2>
+    <ul>
+      <% @reservation.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
