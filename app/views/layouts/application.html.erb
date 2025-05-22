@@ -23,7 +23,7 @@
   <% if current_user.avatar.attached? %>
     <%= image_tag current_user.avatar.variant(resize_to_limit: [40, 40]), class: "avatar-circle" %>
   <% else %>
-    <%= image_tag "no_icon_.png", class: "avatar-circle" %>
+    <%= image_tag "no_icon.png", class: "avatar-circle" %>
   <% end %>
 
   <!-- トグル -->
