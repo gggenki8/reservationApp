@@ -23,7 +23,7 @@
   <% if current_user.avatar.attached? %>
     <%= image_tag current_user.avatar.variant(resize_to_limit: [40, 40]), class: "avatar-circle" %>
   <% else %>
-    <%= image_tag "no_icon_image.png", class: "avatar-circle" %>
+    <%= image_tag "no_icon_.png", class: "avatar-circle" %>
   <% end %>
 
   <!-- トグル -->
@@ -58,7 +58,5 @@
         <p>Copyright © Potepan Share 2025 All rights reserved</p>
       </div>
     </footer>
-
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </body>
 </html>

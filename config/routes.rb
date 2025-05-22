@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   #ユーザーのマイページ表示用ルート
-  resources :users, only: [:show] do
+  resources :users, only: [:index, :show] do
     member do
       get :profile
       get :edit_account
