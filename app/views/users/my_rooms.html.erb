@@ -1,0 +1,36 @@
+<h2>登録済み一覧</h2>
+
+<p>施設数: <%= @rooms&.count || 0 %></p>
+<% if @rooms.present? %>
+  <table>
+    <thead>
+      <tr>
+        <th>画像</th>
+        <th>施設名</th>
+        <th>紹介文</th>
+        <th>料金</th>
+        <th>作成日</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @rooms.each do |room| %>
+        <tr>
+            <td>
+                <% if room.image.attached? %>
+                <%= image_tag room.image.variant(resize_to_limit: [100, 100]), class: "room-image" %>
+                <% else %>
+                <%= image_tag "no_image.png",class: "room-image" %>
+                <% end %>
+            </td>
+            <td><%= link_to room.name, room_path(room) %></td>
+            <td><%= truncate(room.description.to_s, length: 50) %></td>
+            <td><%= number_to_currency(room.price, unit: "¥") %></td>
+            <td><%= room.created_at.strftime("%Y/%m/%d") %></td>
+            </tr>
+        <% end %>
+      </tbody>
+      </table>
+    <% else %>
+        <p>登録済みの施設はありません。</p>
+      <% end %>
+

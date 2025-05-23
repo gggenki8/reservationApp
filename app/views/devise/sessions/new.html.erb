@@ -1,0 +1,26 @@
+<body class = "sign_up">
+<div class = "login-header">
+<h2>ログイン</h2>
+
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <div class="infield">
+    <%= f.label :email, "メールアドレス" %><br />
+    <%= f.email_field :email, autofocus: true, placeholder: "メールアドレスを入力", class: "form-control" %>
+  </div>
+
+  <div class="infield">
+    <%= f.label :password, "パスワード" %><br />
+    <%= f.password_field :password, placeholder: "パスワードを入力", class: "form-control" %>
+  </div>
+
+  <div class="btn">
+    <%= f.submit "ログイン" %>
+  </div>
+
+  <div class = "new_link">
+  <p><%= link_to "新規作成", new_user_registration_path %>
+</div>
+
+<% end %>
+
+</div>

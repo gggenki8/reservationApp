@@ -1,0 +1,60 @@
+<h2>施設情報の編集</h2>
+
+<%= form_with model: @room, local: true do |f| %>
+  <% if @room.errors.any? %>
+    <div>
+      <strong><%= pluralize(@room.errors.count, "件のエラー") %>があります:</strong>
+      <ul>
+        <% @room.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= f.label :name, "施設名*" %><br>
+    <%= f.text_field :name, placeholder: "ルーム名を入力", required: true %>
+  </div>
+
+  <div>
+    <%= f.label :description, "施設詳細*" %><br>
+    <%= f.text_area :description, placeholder: "施設詳細を入力", rows: 5, required: true %>
+  </div>
+
+  <div>
+    <%= f.label :price, "料金（1日あたり）*" %><br>
+    <%= f.number_field :price, placeholder: "例: 5000", min: 1, required: true %>
+  </div>
+
+  <div>
+    <%= f.label :address, "住所*" %><br>
+    <%= f.text_field :address, placeholder: "例: 東京都渋谷区...", required: true %>
+  </div>
+
+  <div>
+    <%= f.label :image, "施設画像（任意）" %><br>
+    <%= f.file_field :image %>
+    <% if @room.image.attached? %>
+      <p>現在の画像:</p>
+      <%= image_tag @room.image.variant(resize_to_limit: [200, 200]) %>
+    <% else %>
+      <p>現在の画像:なし<p>
+      <%= image_tag "no_image.png", size: "200x200" %>
+    <% end %>
+  </div>
+
+  <div>
+    <%= f.submit "更新する" %>
+    <%= link_to "キャンセル", room_path(@room) %>
+  </div>
+
+  <div>
+  <%= button_to '削除する', room_path(@room),
+              method: :delete,
+              data: { confirm: '本当に削除しますか？' },
+              class: 'btn btn-danger' %>
+  
+  #<%= link_to "削除", room_path(@room), method: :delete, data: { confirm: "本当に削除しますか？" } %>
+  </div>
+<% end %>

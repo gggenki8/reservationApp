@@ -1,0 +1,152 @@
+//初期ホームページ
+.main-viwe {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.back-image {
+    width: 100%;
+    aspect-ratio: 6/5;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+}
+
+.back-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.main-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    z-index: 10;
+}
+
+.hello-title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.search-section {
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.2);
+    box-sizing: border-box;
+}
+.search_input {
+    width: 93%;
+    padding: 1rem;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: none;
+    margin-bottom: 1rem;
+  }
+  
+  .search_button {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+    background-color: #f08080;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  //新規アカウント作成
+  .sign_up {
+    background-color: rgb(224, 219, 219);
+  }
+
+  .new-account-header{
+    width: 100%;
+    max-width: 500px;
+    padding: 50px;
+    background-color: white;
+    box-sizing: border-box;
+    margin: 100px auto;
+    text-align: center;
+    line-height: 50px;
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+
+  .field label {
+    margin-bottom: 0;
+    text-align: left;
+  }
+
+  .form-control {
+    width: auto;
+    height: 30px;
+  }
+  
+  .btn input[type="submit"] {
+    background-color: #ff5733; /* ボタンの背景色をオレンジ色に設定 */
+    color: white;             /* テキストの色を白に設定 */
+    border: none;             /* ボーダーを削除 */
+    padding: 15px 20px;       /* 余白を追加 */
+    border-radius: 5px;       /* ボタンの角を丸くする */
+    cursor: pointer;          /* ポインター表示 */
+    width: 400px;
+  }
+  
+  .login_link a{
+    text-decoration: none;
+    color: black;
+    border: 1px solid black;
+    padding: 15px 79px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  //ログインフォーム
+  .login-header{ 
+    width: 100%;
+    max-width: 500px;
+    padding: 30px;
+    background-color: white;
+    box-sizing: border-box;
+    margin: 100px auto;
+    text-align: center;
+    line-height: 50px;
+  }
+
+  .infield {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+
+  .infield label {
+    margin-bottom: 0;
+    text-align: left;
+    line-height: 0.5;
+  }
+
+  .new_link a{
+    text-decoration: none;
+    color: black;
+    border: 1px solid black;
+    padding: 15px 168px;
+    border-radius: 5px;
+    cursor: pointer;
+  }

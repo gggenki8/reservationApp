@@ -1,0 +1,23 @@
+<body>    
+    <header class = "setting-title">
+        <h3>設定</h3>
+    </header>
+
+    <nav class = "setting-content">
+        <ul>
+            <th><%= link_to "アカウント", user_path(@user)%></th>
+            <th><%= link_to "プロフィール", profile_user_path(@user) %></th>
+        </ul>
+    </nav>
+
+    <div class = "account-header">
+        <h3>アカウント</h3>
+        <%= link_to "✏️編集", edit_account_user_path(@user), class: "edit-control" %>
+    </div>
+    <div class = "account-view">
+        <% if @user.present? %>
+        <p>メールアドレス: <%= @user.email %></p>
+        <p>パスワード: ******** </p> <!-- 実際のパスワードは表示しない -->
+        <% end %>
+    </div>
+</body>

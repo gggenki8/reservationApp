@@ -1,0 +1,9 @@
+<h1>予約詳細</h1>
+<p>部屋名: <%= @reservation.room.name %></p>
+<p>チェックイン日: <%= @reservation.check_in.strftime("%Y年/%m月/%d日") if @reservation.check_in.present? %></p>
+<p>チェックアウト日: <%= @reservation.check_out.strftime("%Y年/%m月/%d日") if @reservation.check_out.present? %></p>
+<p>宿泊日数: <%= (@reservation.check_out - @reservation.check_in).to_i if @reservation.check_in && @reservation.check_out %> 日</p>
+<p>人数: <%= @reservation.number_of_guests %> 人</p>
+<p>お支払い金額: <%= @total_price %> 円</p>
+
+<%= link_to "予約一覧に戻る", room_reservations_path(@room) %>

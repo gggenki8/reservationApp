@@ -1,0 +1,27 @@
+<body>    
+    <header class = "setting-title">
+        <h3>設定</h3>
+    </header>
+
+    <nav class = "setting-content">
+        <ul>
+            <th><%= link_to "アカウント", user_path(@user)%></th>
+            <th><%= link_to "プロフィール", profile_user_path(@user) %></th>
+        </ul>
+    </nav>
+
+    <div class = "account-header">
+        <h3>プロフィール</h3>
+        <%= link_to "✏️編集", edit_profile_user_path(@user) %>
+    </div>
+    <div class = "account-view">
+        <p>アイコン画像</p>
+        <% if @user.present? && @user.avatar.attached? %>
+        <%= image_tag @user.avatar, alt: "ユーザーアイコン", class: "user-avator" %>
+        <% else %>
+        <%= image_tag "no_icon.png", alt: "デフォルトアイコン", class: "user-avatar" %>
+        <% end %>
+        <p>名前 <%= @user.name %></p>
+        <p>自己紹介 <%= @user.introduction %></p>
+    </div>
+</body>
